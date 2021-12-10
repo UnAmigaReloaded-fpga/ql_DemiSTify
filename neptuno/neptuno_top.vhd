@@ -123,10 +123,10 @@ architecture RTL of neptuno_top is
    signal  DAC_L : std_logic_vector(9 downto 0);
 	signal  DAC_R : std_logic_vector(9 downto 0);
 	
-COMPONENT  PCW
+COMPONENT  ql
 	PORT
 	(
-		CLOCK_27 :	IN STD_LOGIC;
+		CLOCK_27 :	IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		--RESET_N :   IN std_logic;
 		SDRAM_DQ		:	 INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SDRAM_A		:	 OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
@@ -140,8 +140,8 @@ COMPONENT  PCW
 		SDRAM_CLK		:	 OUT STD_LOGIC;
 		SDRAM_CKE		:	 OUT STD_LOGIC;
 		-- UART
-		UART_TX    :   OUT STD_LOGIC;
-		UART_RX    :   IN STD_LOGIC;
+		--UART_TX    :   OUT STD_LOGIC;
+		--UART_RX    :   IN STD_LOGIC;
 		SPI_DO		:	 OUT STD_LOGIC;
 --		SPI_SD_DI	:	 IN STD_LOGIC;
 		SPI_DI		:	 IN STD_LOGIC;
@@ -295,10 +295,10 @@ joy: joydecoder
 		joy2fire2		=> joy2fire2
 	);
 	
-guest: COMPONENT  PCW
+guest: COMPONENT ql
 	PORT map
 	(
-		CLOCK_27 => clock_50_i,
+		CLOCK_27 => clock_50_i & clock_50_i,
 		--RESET_N => reset_n,
 		-- clocks
 		SDRAM_DQ => DRAM_DQ,
@@ -313,8 +313,8 @@ guest: COMPONENT  PCW
 		SDRAM_CLK => DRAM_CLK,
 		SDRAM_CKE => DRAM_CKE,
 		
-		UART_TX  => open,
-		UART_RX  => AUDIO_INPUT,
+		--UART_TX  => open,
+		--UART_RX  => AUDIO_INPUT,
 		
 --		SPI_SD_DI => sd_miso,
 		SPI_DO => spi_fromguest,

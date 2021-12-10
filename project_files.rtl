@@ -1,7 +1,7 @@
 # files inherited from the guest core:
 
-FILES.qip
-sys/sys.qip
+files.qip
+mist-modules/mist_core.qip
 demistify_config_pkg.vhd
 
 # The controller module
